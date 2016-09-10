@@ -1,15 +1,25 @@
 {
-	"compilerOptions": {
-		"module": "commonjs",
-		"outDir": "./dist",
-		"target": "ES6",
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-        "declaration": true,
-        "sourceMap": true
-	},
-	"compileOnSave": false,
-	"files": [
-		"src/index.ts"
-	]
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "./dist",
+    "target": "ES6",
+    "declaration": true,
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es5", "dom", "es2015"],
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true
+  },
+  "compileOnSave": false,
+  "files": [
+    "src/index.ts"
+  ]
 }

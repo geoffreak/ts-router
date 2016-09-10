@@ -2,12 +2,12 @@ import Cookie from './cookie';
 import { Charset, HttpMethod, MediaType } from './util';
 import Context from './context';
 declare class Response {
-    static status(status: number | Response.Status): ResponseBuilder;
     body: any;
     status: number;
     headers: {
         [key: string]: string;
     };
+    static status(status: number | Response.Status): ResponseBuilder;
     constructor(body: string, status: number, headers: {
         [key: string]: string;
     });

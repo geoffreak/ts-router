@@ -1,6 +1,6 @@
 "use strict";
-const util_1 = require('./util');
 require('reflect-metadata');
+const util_1 = require('./util');
 const symbols_1 = require('./symbols');
 function Before(target, key) {
     target[symbols_1.Routes] = target[symbols_1.Routes] || {};
@@ -50,7 +50,7 @@ exports.Inject = Inject;
 function Path(path) {
     return (target, key) => {
         if (key) {
-            let type = Reflect.getMetadata(util_1.ReflectType.PARAMETER_TYPE, target, key);
+            // let type: Function = Reflect.getMetadata(ReflectType.PARAMETER_TYPE, target, key);
             target[symbols_1.Routes] = target[symbols_1.Routes] || {};
             target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
             target[symbols_1.Routes][key].path = target[symbols_1.Routes][key].path || [];
@@ -86,10 +86,10 @@ function QueryParam(param) {
             target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
             target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
             target[symbols_1.Routes][key].parameters[index] = {
-                index: index,
-                type: type,
-                key: param,
-                paramType: 'query-param'
+                index,
+                type,
+                key,
+                paramType: 'query-param',
             };
         }
         else {
@@ -97,7 +97,7 @@ function QueryParam(param) {
             target[symbols_1.Properties][key] = {
                 key: param,
                 type: Reflect.getMetadata(util_1.ReflectType.TYPE, target, key),
-                paramType: 'query-param'
+                paramType: 'query-param',
             };
         }
     };
@@ -111,10 +111,10 @@ function PathParam(param) {
             target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
             target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
             target[symbols_1.Routes][key].parameters[index] = {
-                index: index,
-                type: type,
-                key: param,
-                paramType: 'path-param'
+                index,
+                type,
+                key,
+                paramType: 'path-param',
             };
         }
         else {
@@ -122,7 +122,7 @@ function PathParam(param) {
             target[symbols_1.Properties][key] = {
                 key: param,
                 type: Reflect.getMetadata(util_1.ReflectType.TYPE, target, key),
-                paramType: 'path-param'
+                paramType: 'path-param',
             };
         }
     };
@@ -136,10 +136,10 @@ function BodyParam(param) {
             target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
             target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
             target[symbols_1.Routes][key].parameters[index] = {
-                index: index,
-                type: type,
-                key: param,
-                paramType: 'body-param'
+                index,
+                type,
+                key,
+                paramType: 'body-param',
             };
         }
         else {
@@ -147,7 +147,7 @@ function BodyParam(param) {
             target[symbols_1.Properties][key] = {
                 key: param,
                 type: Reflect.getMetadata(util_1.ReflectType.TYPE, target, key),
-                paramType: 'body-param'
+                paramType: 'body-param',
             };
         }
     };
@@ -161,10 +161,10 @@ function HeaderParam(param) {
             target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
             target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
             target[symbols_1.Routes][key].parameters[index] = {
-                index: index,
-                type: type,
-                key: param,
-                paramType: 'header-param'
+                index,
+                type,
+                key,
+                paramType: 'header-param',
             };
         }
         else {
@@ -172,7 +172,7 @@ function HeaderParam(param) {
             target[symbols_1.Properties][key] = {
                 key: param,
                 type: Reflect.getMetadata(util_1.ReflectType.TYPE, target, key),
-                paramType: 'header-param'
+                paramType: 'header-param',
             };
         }
     };
@@ -185,10 +185,10 @@ function Query(target, key, index) {
         target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
         target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
         target[symbols_1.Routes][key].parameters[index] = {
-            index: index,
-            type: type,
+            index,
+            type,
             key: '',
-            paramType: 'query'
+            paramType: 'query',
         };
     }
     else {
@@ -196,7 +196,7 @@ function Query(target, key, index) {
         target[symbols_1.Properties][key] = {
             key: '',
             type: Reflect.getMetadata(util_1.ReflectType.TYPE, target, key),
-            paramType: 'query'
+            paramType: 'query',
         };
     }
 }
@@ -208,10 +208,10 @@ function Params(target, key, index) {
         target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
         target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
         target[symbols_1.Routes][key].parameters[index] = {
-            index: index,
-            type: type,
+            index,
+            type,
             key: '',
-            paramType: 'params'
+            paramType: 'params',
         };
     }
     else {
@@ -219,7 +219,7 @@ function Params(target, key, index) {
         target[symbols_1.Properties][key] = {
             key: '',
             type: Reflect.getMetadata(util_1.ReflectType.TYPE, target, key),
-            paramType: 'params'
+            paramType: 'params',
         };
     }
 }
@@ -231,10 +231,10 @@ function Body(target, key, index) {
         target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
         target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
         target[symbols_1.Routes][key].parameters[index] = {
-            index: index,
-            type: type,
+            index,
+            type,
             key: '',
-            paramType: 'body'
+            paramType: 'body',
         };
     }
     else {
@@ -242,7 +242,7 @@ function Body(target, key, index) {
         target[symbols_1.Properties][key] = {
             key: '',
             type: Reflect.getMetadata(util_1.ReflectType.TYPE, target, key),
-            paramType: 'body'
+            paramType: 'body',
         };
     }
 }
@@ -254,10 +254,10 @@ function Headers(target, key, index) {
         target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
         target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
         target[symbols_1.Routes][key].parameters[index] = {
-            index: index,
-            type: type,
+            index,
+            type,
             key: '',
-            paramType: 'headers'
+            paramType: 'headers',
         };
     }
     else {
@@ -265,7 +265,7 @@ function Headers(target, key, index) {
         target[symbols_1.Properties][key] = {
             key: '',
             type: Reflect.getMetadata(util_1.ReflectType.TYPE, target, key),
-            paramType: 'headers'
+            paramType: 'headers',
         };
     }
 }
@@ -277,10 +277,10 @@ function AppContext(target, key, index) {
         target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
         target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
         target[symbols_1.Routes][key].parameters[index] = {
-            index: index,
-            type: type,
+            index,
+            type,
             key: '',
-            paramType: 'app-context'
+            paramType: 'app-context',
         };
     }
     else {
@@ -288,7 +288,7 @@ function AppContext(target, key, index) {
         target[symbols_1.Properties][key] = {
             key: '',
             type: Reflect.getMetadata(util_1.ReflectType.TYPE, target, key),
-            paramType: 'app-context'
+            paramType: 'app-context',
         };
     }
 }
@@ -300,10 +300,10 @@ function HttpContext(target, key, index) {
         target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
         target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
         target[symbols_1.Routes][key].parameters[index] = {
-            index: index,
-            type: type,
+            index,
+            type,
             key: '',
-            paramType: 'http-context'
+            paramType: 'http-context',
         };
     }
     else {
@@ -311,7 +311,7 @@ function HttpContext(target, key, index) {
         target[symbols_1.Properties][key] = {
             key: '',
             type: Reflect.getMetadata(util_1.ReflectType.TYPE, target, key),
-            paramType: 'http-context'
+            paramType: 'http-context',
         };
     }
 }
@@ -322,10 +322,10 @@ function RouteResponse(target, key, index) {
     target[symbols_1.Routes][key] = target[symbols_1.Routes][key] || {};
     target[symbols_1.Routes][key].parameters = target[symbols_1.Routes][key].parameters || [];
     target[symbols_1.Routes][key].parameters[index] = {
-        index: index,
-        type: type,
+        index,
+        type,
         key: '',
-        paramType: 'response'
+        paramType: 'response',
     };
 }
 exports.RouteResponse = RouteResponse;

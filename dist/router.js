@@ -53,7 +53,7 @@ class Router {
                     let parameters = [];
                     let body = {};
                     const contentType = (context.headers['content-type'] || '').split(';');
-                    //parse body
+                    // parse body
                     if (matchedRoute.consume === util_1.MediaType.JSON &&
                         contentType.indexOf(util_1.mediaTypeToString(util_1.MediaType.JSON)) !== -1) {
                         body = yield new Promise((resolve, reject) => {
@@ -76,10 +76,10 @@ class Router {
                         contentType.indexOf(util_1.mediaTypeToString(util_1.MediaType.MULTIPART)) !== -1) {
                         let result = yield util_1.parseMulti(context);
                         body = {};
-                        for (let key in result.fields) {
+                        for (let key of Object.keys(result.fields)) {
                             body[key] = result.fields[key];
                         }
-                        for (let key in result.files) {
+                        for (let key of Object.keys(result.files)) {
                             body[key] = result.files[key];
                         }
                     }
@@ -123,6 +123,7 @@ class Router {
                             case 'response':
                                 ret = response;
                                 break;
+                            default:
                         }
                         if ([Object, String, Date, Number, Boolean].indexOf(parameter.type) !== -1) {
                             return parameter.type(ret);
@@ -138,7 +139,7 @@ class Router {
                         parameters.push(getParameter(parameter));
                     }
                     let klass = matchedRoute.routerClass;
-                    for (let key in klass.prototype[symbols_1.Properties] || []) {
+                    for (let key of Object.keys(klass.prototype[symbols_1.Properties])) {
                         klass.prototype[key] = getParameter(klass.prototype[symbols_1.Properties][key]);
                     }
                     let router = new klass();
@@ -159,6 +160,7 @@ class Router {
                             response.body = JSON.stringify(response.body);
                             response.headers['Content-Type'] = util_1.mediaTypeToString(matchedRoute.produce);
                             break;
+                        default:
                     }
                     response.send(appContext);
                     for (let after of afters) {
@@ -169,18 +171,13 @@ class Router {
                         yield router[after.route](...p);
                     }
                     yield next();
-                    router = null;
-                    klass = null;
-                    response = null;
-                    parameters = null;
-                    body = null;
                 }
             });
         };
     }
     use(RouterClass) {
         let router = RouterClass.prototype;
-        for (let key in router[symbols_1.Routes]) {
+        for (let key of Object.keys(router[symbols_1.Routes])) {
             let route = router[symbols_1.Routes][key];
             let pathReg = [];
             let pathKeys = [];
@@ -193,15 +190,15 @@ class Router {
             this._routes.push({
                 routerClass: RouterClass,
                 method: route.method,
-                path: (route.path || []).map(p => router[symbols_1.RoutePath] + p),
+                path: (route.path || []).map((p) => router[symbols_1.RoutePath] + p),
                 produce: route.produce,
                 consume: route.consume,
                 injection: route.injection,
                 filter: route.filter,
                 route: key,
-                pathReg: pathReg,
-                pathKeys: pathKeys,
-                parameters: route.parameters
+                pathReg,
+                pathKeys,
+                parameters: route.parameters,
             });
         }
     }

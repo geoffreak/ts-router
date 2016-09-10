@@ -1,6 +1,3 @@
-declare const Routes: symbol;
-export { Routes };
-declare const Properties: symbol;
-export { Properties };
-declare const RoutePath: symbol;
-export { RoutePath };
+export declare const Routes: symbol;
+export declare const Properties: symbol;
+export declare const RoutePath: symbol;

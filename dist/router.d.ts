@@ -5,6 +5,6 @@ declare class Router {
     private _routes;
     constructor();
     routes(): (ctx: Koa.Context, next: Function) => Promise<void>;
-    use<T extends Controller>(RouterClass: new (...args) => T): void;
+    use<T extends Controller>(RouterClass: new (...args: any[]) => T): void;
 }
 export default Router;

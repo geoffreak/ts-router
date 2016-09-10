@@ -1,8 +1,5 @@
 "use strict";
-const Routes = Symbol();
-exports.Routes = Routes;
-const Properties = Symbol();
-exports.Properties = Properties;
-const RoutePath = Symbol();
-exports.RoutePath = RoutePath;
+exports.Routes = Symbol();
+exports.Properties = Symbol();
+exports.RoutePath = Symbol();
 //# sourceMappingURL=symbols.js.map

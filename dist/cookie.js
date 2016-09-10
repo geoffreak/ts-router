@@ -26,10 +26,12 @@ class Cookie {
         let ret = this.content;
         ret += '; Path=' + this.path;
         ret += '; Expires=' + this.expires.toUTCString();
-        if (this.secure)
+        if (this.secure) {
             ret += '; Secure';
-        if (this.httpOnly)
+        }
+        if (this.httpOnly) {
             ret += '; HttpOnly';
+        }
         return ret;
     }
 }

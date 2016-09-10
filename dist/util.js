@@ -28,6 +28,8 @@ function mediaTypeToString(type) {
             return 'application/x-www-form-urlencoded';
         case MediaType.MULTIPART:
             return 'multipart/form-data';
+        default:
+            throw new Error('Unknown media type');
     }
 }
 exports.mediaTypeToString = mediaTypeToString;
@@ -42,15 +44,15 @@ exports.ReflectType = ReflectType;
 function parseMulti(ctx, opts) {
     opts = opts || {};
     return new Promise((resolve, reject) => {
-        var fields = {};
-        var files = {};
-        var form = new formy.IncomingForm(opts);
+        let fields = {};
+        let files = {};
+        let form = new formy.IncomingForm(opts);
         form
-            .on('end', () => resolve({ fields: fields, files: files }))
-            .on('error', err => reject(err))
+            .on('end', () => resolve({ fields, files }))
+            .on('error', (err) => reject(err))
             .on('field', (field, value) => {
             if (fields[field]) {
-                if (Array.isArray(fields[field])) {
+                if (files[field] instanceof Array) {
                     fields[field].push(value);
                 }
                 else {
@@ -63,7 +65,7 @@ function parseMulti(ctx, opts) {
         })
             .on('file', (field, file) => {
             if (files[field]) {
-                if (Array.isArray(files[field])) {
+                if (files[field] instanceof Array) {
                     files[field].push(file);
                 }
                 else {

@@ -14,7 +14,7 @@ class Response {
     send(context) {
         context.body = this.body;
         context.status = this.status;
-        for (const key in this.headers) {
+        for (const key of Object.keys(this.headers)) {
             context.set(key, this.headers[key]);
         }
     }
@@ -109,6 +109,8 @@ class ResponseBuilder {
                     case util_1.HttpMethod.DELETE:
                         v = 'DELETE';
                         break;
+                    default:
+                        v = 'POST';
                 }
             }
             this._allow.push(v);
@@ -121,6 +123,7 @@ class ResponseBuilder {
                 case util_1.Charset.UTF8:
                     this._charset = 'utf-8';
                     break;
+                default:
             }
         }
         else {
